@@ -2,58 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Produk;
+use Illuminate\Http\Request;
 
 class ProdukController extends Controller
 {
-    /**
-     * READ - tampilkan semua produk
-     */
     public function index()
     {
-        $Produk = Produk::all();
-        return view('welcome', compact('Produk'));
+        $produk = Produk::all();
+        return view('produk.index', compact('produk'));
     }
 
-    /**
-     * CREATE - tambah produk
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nama' => 'required',
-            'harga' => 'required|numeric',
-            'stok' => 'required|numeric'
-        ]);
-
-        Produk::create([
-            'nama' => $request->nama,
-            'harga' => $request->harga,
-            'stok' => $request->stok
-        ]);
-
-        return redirect('/');
-    }
-
-    /**
-     * EDIT - ambil data 1 produk
-     */
     public function edit($id)
     {
         $produk = Produk::findOrFail($id);
-        return view('edit', compact('produk'));
+        return view('produk.edit', compact('produk'));
     }
 
-    /**
-     * UPDATE - simpan perubahan
-     */
     public function update(Request $request, $id)
     {
         $request->validate([
             'nama' => 'required',
-            'harga' => 'required|numeric',
-            'stok' => 'required|numeric'
+            'harga' => 'required',
+            'deskripsi' => 'required',
         ]);
 
         $produk = Produk::findOrFail($id);
@@ -61,20 +32,34 @@ class ProdukController extends Controller
         $produk->update([
             'nama' => $request->nama,
             'harga' => $request->harga,
-            'stok' => $request->stok
+            'deskripsi' => $request->deskripsi,
         ]);
 
-        return redirect('/');
+        return redirect('/produk');
     }
 
-    /**
-     * DELETE - hapus produk
-     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required',
+            'harga' => 'required',
+            'deskripsi' => 'required',
+        ]);
+
+        Produk::create([
+            'nama' => $request->nama,
+            'harga' => $request->harga,
+            'deskripsi' => $request->deskripsi,
+        ]);
+
+        return redirect('/produk');
+    }
+
     public function destroy($id)
     {
         $produk = Produk::findOrFail($id);
         $produk->delete();
 
-        return redirect('/');
+        return redirect('/produk');
     }
 }

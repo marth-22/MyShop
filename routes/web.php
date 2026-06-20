@@ -3,27 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdukController;
 
-/*
-|-------------------------
-| HALAMAN WELCOME
-|-------------------------
-*/
 Route::get('/', [ProdukController::class, 'index']);
 
-/*
-|-------------------------
-| CRUD PRODUK
-|-------------------------
-*/
-
-// Tambah data
-Route::post('/produk/store', [ProdukController::class, 'store']);
-
-// Edit form
-Route::get('/produk/edit/{id}', [ProdukController::class, 'edit']);
-
-// Update data
-Route::put('/produk/update/{id}', [ProdukController::class, 'update']);
-
-// Hapus data
-Route::delete('/produk/delete/{id}', [ProdukController::class, 'destroy']);
+Route::get('/produk', [ProdukController::class, 'index']);
+Route::get('/produk/create', [ProdukController::class, 'create']);
+Route::post('/produk', [ProdukController::class, 'store']);
+Route::get('/produk/{id}/edit', [ProdukController::class, 'edit']);
+Route::post('/produk/{id}/update', [ProdukController::class, 'update']);
