@@ -12,11 +12,6 @@
 <!-- HEADER -->
 <div class="header">
     <div class="logo">MyShop</div>
-
-    <div class="nav">
-        <a href="/login" class="btn-login">Masuk</a>
-        <a href="/register" class="btn-register">Daftar</a>
-    </div>
 </div>
 
 <!-- HERO -->
@@ -39,13 +34,13 @@
             @endforeach
         </div>
     @else
-        <p style="text-align:center;">Belum ada produk</p>
+        <p class="empty">Belum ada produk</p>
     @endif
 </div>
 
 <!-- FOOTER -->
 <div class="footer">
-    <p>© {{ date('2026') }} MyShop | Martha |</p>
+    <p>© {{ date('2026') }} MyShop | Martha</p>
 </div>
 
 </body>
